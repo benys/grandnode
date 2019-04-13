@@ -5,6 +5,7 @@ using Grand.Framework.Mvc.Models;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using Grand.Api.DTOs.Common;
 
 namespace Grand.Api.DTOs.Catalog
 {
@@ -23,6 +24,7 @@ namespace Grand.Api.DTOs.Catalog
             this.AttributeCombinations = new List<ProductAttributeCombinationDto>();
             this.Tags = new List<string>();
             this.AppliedDiscounts = new List<string>();
+            this.Locales = new List<LocalizedPropertyDto>();
         }
         [BsonElement("ProductTypeId")]
         public ProductType ProductType { get; set; }
@@ -159,5 +161,9 @@ namespace Grand.Api.DTOs.Catalog
         [BsonElement("ProductTags")]
         public IList<string> Tags { get; set; }
         public IList<string> AppliedDiscounts { get; set; }
+
+        [BsonElement("Locales")]
+
+        public IList<LocalizedPropertyDto> Locales { get; set; }
     }
 }

@@ -123,6 +123,16 @@ namespace Grand.Api.Services
             product.SeName = model.SeName;
             //search engine name
             await _urlRecordService.SaveSlug(product, model.SeName, "");
+            var anotherSeNames = model.Locales?.Where(l => l.LocaleKey == "SeName");
+            if (anotherSeNames != null)
+            {
+                foreach (var localizedPropertyDto in anotherSeNames)
+                {
+                    var localizedName = model.Locales.FirstOrDefault(l => l.LocaleKey == "Name" && l.LanguageId == localizedPropertyDto.LanguageId);
+                    localizedPropertyDto.LocaleValue = await product.ValidateSeName(localizedPropertyDto.LocaleValue, localizedName?.LocaleValue ?? product.Name, true, _seoSettings, _urlRecordService, _languageService);
+                }
+            }
+
             await _productService.UpdateProduct(product);
 
             //activity log
@@ -141,6 +151,16 @@ namespace Grand.Api.Services
             product.SeName = model.SeName;
             //search engine name
             await _urlRecordService.SaveSlug(product, model.SeName, "");
+            var anotherSeNames = model.Locales?.Where(l => l.LocaleKey == "SeName");
+            if (anotherSeNames != null)
+            {
+                foreach (var localizedPropertyDto in anotherSeNames)
+                {
+                    var localizedName = model.Locales.FirstOrDefault(l => l.LocaleKey == "Name" && l.LanguageId == localizedPropertyDto.LanguageId);
+                    localizedPropertyDto.LocaleValue = await product.ValidateSeName(localizedPropertyDto.LocaleValue, localizedName?.LocaleValue ?? product.Name, true, _seoSettings, _urlRecordService, _languageService);
+                }
+            }
+
             //update product
             await _productService.UpdateProduct(product);
 

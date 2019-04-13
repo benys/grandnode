@@ -77,6 +77,7 @@ namespace Grand.Api.Infrastructure
             builder.ComplexType<ProductAttributeMappingDto>();
             builder.ComplexType<ProductAttributeValueDto>();
             builder.ComplexType<ProductAttributeCombinationDto>();
+            builder.ComplexType<LocalizedPropertyDto>();
 
             //update stock for product
             ActionConfiguration updateStock = product.Action("UpdateStock");
